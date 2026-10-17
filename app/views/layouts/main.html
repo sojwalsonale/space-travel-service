@@ -4,3 +4,26 @@ https://prototype-kit.service.gov.uk/how-to-use-layouts/
 #}
 
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% set serviceUrl = "/" %}
+
+{% block pageTitle %}
+  {%- if errorList and errorList.length %}Error: {% endif -%}
+  {%- if pageName %}{{ pageName }} – {% endif -%}
+  {{ serviceName }} – GOV.UK
+{% endblock %}
+
+{# Inside the header landmark, directly under the service navigation #}
+{% block headerEnd %}
+  {{ govukPhaseBanner({
+    tag: {
+      text: "Prototype"
+    },
+    text: "This is a prototype, not a real service. Do not enter real personal details."
+  }) }}
+{% endblock %}
+
+{# Back links go before <main>, as the GOV.UK Design System recommends #}
+{% block beforeContent %}
+  {% block backLink %}{% endblock %}
+{% endblock %}

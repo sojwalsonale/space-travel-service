@@ -1,0 +1,44 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "How long do you want to stay on the Moon?" %}
+
+{% block backLink %}
+  {{ govukBackLink({ text: "Back", href: "/destination" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% include "includes/error-summary.html" %}
+
+    <form method="post" novalidate>
+
+      {{ govukRadios({
+        name: "moon-stay",
+        fieldset: {
+          legend: {
+            text: pageName,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--l"
+          }
+        },
+        hint: {
+          text: "This does not include travel time. Lorem ipsum dolor sit amet."
+        },
+        errorMessage: errors["moon-stay"] if errors,
+        value: data["moon-stay"],
+        items: [
+          { value: "Up to 1 week", text: "Up to 1 week" },
+          { value: "1 week to 1 month", text: "1 week to 1 month" },
+          { value: "More than 1 month", text: "More than 1 month" }
+        ]
+      }) }}
+
+      {{ govukButton({ text: "Continue" }) }}
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}

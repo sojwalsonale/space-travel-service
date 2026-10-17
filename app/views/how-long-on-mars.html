@@ -1,0 +1,44 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "How long do you want to stay on Mars?" %}
+
+{% block backLink %}
+  {{ govukBackLink({ text: "Back", href: "/destination" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% include "includes/error-summary.html" %}
+
+    <form method="post" novalidate>
+
+      {{ govukRadios({
+        name: "mars-stay",
+        fieldset: {
+          legend: {
+            text: pageName,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--l"
+          }
+        },
+        hint: {
+          text: "This does not include travel time. Return flights can only leave when Earth and Mars line up. Lorem ipsum dolor sit amet."
+        },
+        errorMessage: errors["mars-stay"] if errors,
+        value: data["mars-stay"],
+        items: [
+          { value: "Up to 6 months", text: "Up to 6 months" },
+          { value: "6 months to 1 year", text: "6 months to 1 year" },
+          { value: "More than 1 year", text: "More than 1 year" }
+        ]
+      }) }}
+
+      {{ govukButton({ text: "Continue" }) }}
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}

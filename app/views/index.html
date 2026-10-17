@@ -1,20 +1,40 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName="Home" %}
-
 {% block content %}
-
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
+    <h1 class="govuk-heading-xl">{{ serviceName }}</h1>
 
-    <h1 class="govuk-heading-xl">
-      {{ serviceName }}
-    </h1>
+    <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
-    {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %}
+    <p class="govuk-body">Use this service to:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>apply for a trip to the Moon or Mars</li>
+      <li>lorem ipsum dolor sit amet</li>
+      <li>consectetur adipiscing elit</li>
+    </ul>
+
+    <p class="govuk-body">Applying takes around 5 minutes.</p>
+
+    {{ govukButton({
+      text: "Start now",
+      href: "/destination",
+      isStartButton: true
+    }) }}
+
+    <h2 class="govuk-heading-m">Before you start</h2>
+
+    <p class="govuk-body">You’ll need:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>your full name</li>
+      <li>your home address, including the postcode</li>
+    </ul>
+
+    <p class="govuk-body">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
   </div>
 </div>
-
 {% endblock %}

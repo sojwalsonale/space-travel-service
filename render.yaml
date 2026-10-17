@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: space-travel-service
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      # Open prototype: no password needed to view it
+      - key: USE_AUTH
+        value: "false"

@@ -1,0 +1,78 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What is your address?" %}
+
+{% block backLink %}
+  {{ govukBackLink({ text: "Back", href: "/full-name" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% include "includes/error-summary.html" %}
+
+    <form method="post" novalidate>
+
+      {% call govukFieldset({
+        legend: {
+          text: pageName,
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      }) %}
+
+        {{ govukInput({
+          id: "address-line-1",
+          name: "address-line-1",
+          label: { text: "Address line 1" },
+          errorMessage: errors["address-line-1"] if errors,
+          value: data["address-line-1"],
+          autocomplete: "address-line1"
+        }) }}
+
+        {{ govukInput({
+          id: "address-line-2",
+          name: "address-line-2",
+          label: { text: "Address line 2 (optional)" },
+          value: data["address-line-2"],
+          autocomplete: "address-line2"
+        }) }}
+
+        {{ govukInput({
+          id: "address-town",
+          name: "address-town",
+          label: { text: "Town or city" },
+          errorMessage: errors["address-town"] if errors,
+          value: data["address-town"],
+          autocomplete: "address-level2",
+          classes: "govuk-!-width-two-thirds"
+        }) }}
+
+        {{ govukInput({
+          id: "address-county",
+          name: "address-county",
+          label: { text: "County (optional)" },
+          value: data["address-county"],
+          classes: "govuk-!-width-two-thirds"
+        }) }}
+
+        {{ govukInput({
+          id: "address-postcode",
+          name: "address-postcode",
+          label: { text: "Postcode" },
+          errorMessage: errors["address-postcode"] if errors,
+          value: data["address-postcode"],
+          autocomplete: "postal-code",
+          classes: "govuk-input--width-10"
+        }) }}
+
+      {% endcall %}
+
+      {{ govukButton({ text: "Continue" }) }}
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}

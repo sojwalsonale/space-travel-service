@@ -1,0 +1,91 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check your answers" %}
+
+{% set isMars = data["destination"] == "mars" %}
+
+{% set addressHtml %}
+  {{ data["address-line-1"] }}<br>
+  {% if data["address-line-2"] %}{{ data["address-line-2"] }}<br>{% endif %}
+  {{ data["address-town"] }}<br>
+  {% if data["address-county"] %}{{ data["address-county"] }}<br>{% endif %}
+  {{ data["address-postcode"] }}
+{% endset %}
+
+{% block backLink %}
+  {{ govukBackLink({ text: "Back", href: "/address" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+    <h2 class="govuk-heading-m">Your trip</h2>
+
+    {{ govukSummaryList({
+      classes: "govuk-!-margin-bottom-9",
+      rows: [
+        {
+          key: { text: "Destination" },
+          value: { text: "Mars" if isMars else "The Moon" },
+          actions: {
+            items: [
+              { href: "/destination", text: "Change", visuallyHiddenText: "destination" }
+            ]
+          }
+        },
+        {
+          key: { text: "Length of stay" },
+          value: { text: data["mars-stay"] if isMars else data["moon-stay"] },
+          actions: {
+            items: [
+              {
+                href: "/how-long-on-mars" if isMars else "/how-long-on-moon",
+                text: "Change",
+                visuallyHiddenText: "length of stay"
+              }
+            ]
+          }
+        }
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-m">Your details</h2>
+
+    {{ govukSummaryList({
+      classes: "govuk-!-margin-bottom-9",
+      rows: [
+        {
+          key: { text: "Full name" },
+          value: { text: data["full-name"] },
+          actions: {
+            items: [
+              { href: "/full-name", text: "Change", visuallyHiddenText: "full name" }
+            ]
+          }
+        },
+        {
+          key: { text: "Address" },
+          value: { html: addressHtml },
+          actions: {
+            items: [
+              { href: "/address", text: "Change", visuallyHiddenText: "address" }
+            ]
+          }
+        }
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-m">Now send your application</h2>
+
+    <p class="govuk-body">By sending this application you are confirming that, to the best of your knowledge, the details you are providing are correct. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+    <form method="post" novalidate>
+      {{ govukButton({ text: "Accept and send" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}

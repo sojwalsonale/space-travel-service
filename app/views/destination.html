@@ -1,0 +1,51 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Where do you want to travel to?" %}
+
+{% block backLink %}
+  {{ govukBackLink({ text: "Back", href: "/" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% include "includes/error-summary.html" %}
+
+    <form method="post" novalidate>
+
+      {{ govukRadios({
+        name: "destination",
+        fieldset: {
+          legend: {
+            text: pageName,
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--l"
+          }
+        },
+        hint: {
+          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        },
+        errorMessage: errors.destination if errors,
+        value: data["destination"],
+        items: [
+          {
+            value: "moon",
+            text: "The Moon",
+            hint: { text: "About 3 days to get there. Lorem ipsum dolor sit amet." }
+          },
+          {
+            value: "mars",
+            text: "Mars",
+            hint: { text: "About 7 months to get there. Lorem ipsum dolor sit amet." }
+          }
+        ]
+      }) }}
+
+      {{ govukButton({ text: "Continue" }) }}
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}
