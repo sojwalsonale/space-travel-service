@@ -9,3 +9,6 @@ migrate.log
 # General ignores
 .DS_Store
 .idea
+
+# Documents (for example the candidate guide PDF) are never committed
+*.pdf
